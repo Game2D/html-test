@@ -2,55 +2,33 @@
   <head>
     <title>Test</title>
     <meta id="viewport" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <meta name="google-play-app" content="app-id=com.test">
+    
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/ain/smartbanner.js/main/dist/smartbanner.min.css">
+    <script src="https://raw.githubusercontent.com/ain/smartbanner.js/main/dist/smartbanner.min.js"></script>
+
+    <!-- Start SmartBanner configuration -->
+    <meta name="smartbanner:title" content="Smart Application">
+    <meta name="smartbanner:author" content="SmartBanner Contributors">
+    <meta name="smartbanner:price" content="FREE">
+    <meta name="smartbanner:price-suffix-apple" content=" - On the App Store">
+    <meta name="smartbanner:price-suffix-google" content=" - In Google Play">
+    <meta name="smartbanner:icon-apple" content="https://url/to/apple-store-icon.png">
+    <meta name="smartbanner:icon-google" content="https://url/to/google-play-icon.png">
+    <meta name="smartbanner:button" content="VIEW">
+    <meta name="smartbanner:button-url-apple" content="https://ios/application-url">
+    <meta name="smartbanner:button-url-google" content="https://android/application-url">
+    <meta name="smartbanner:enabled-platforms" content="android,ios">
+    <meta name="smartbanner:close-label" content="Close">
+    <!-- End SmartBanner configuration -->
   </head>
   <body>
     <a id="open-app-link" onclick="openApp()">Открыть приложение</a>
     <br /><br />
     <a id="stay-in-browser">Остаться в браузере</a>
-    <br /><br />
-    <a id="test-smart">Тест показа</a>
     <script>
         const openApp = () => {
             window.location.href = 'gilmon://'
         }
-
-        let btnAdd = document.getElementById("test-smart")
-
-        let deferredPrompt;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-          // Prevent Chrome 67 and earlier from automatically showing the prompt
-          e.preventDefault();
-          // Stash the event so it can be triggered later.
-          deferredPrompt = e;
-        });
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-          // Prevent Chrome 67 and earlier from automatically showing the prompt
-          e.preventDefault();
-          // Stash the event so it can be triggered later.
-          deferredPrompt = e;
-          // Update UI notify the user they can add to home screen
-          btnAdd.style.display = 'block';
-        });
-
-        btnAdd.addEventListener('click', (e) => {
-          // hide our user interface that shows our A2HS button
-          btnAdd.style.display = 'none';
-          // Show the prompt
-          deferredPrompt.prompt();
-          // Wait for the user to respond to the prompt
-          deferredPrompt.userChoice
-            .then((choiceResult) => {
-              if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
-              } else {
-                console.log('User dismissed the A2HS prompt');
-              }
-              deferredPrompt = null;
-            });
-        });
     </script>
   </body>
 </html>
