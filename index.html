@@ -2,15 +2,17 @@
   <head>
     <title>Test</title>
     <meta id="viewport" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
-    <a id="open-app-link" onclick="openApp()">Открыть приложение</a>
-    <br /><br />
-    <a id="stay-in-browser">Остаться в браузере</a>
+    <span>Открываем приложение...</span>
     <script>
-        const openApp = () => {
-            window.location.href = 'gilmon://'
-        }
+        $(function(){
+          window.location = 'gilmon://';
+          setTimeout(function(){
+            window.location = '/fallback.html';
+          }, 500);
+        });
     </script>
   </body>
 </html>
