@@ -1,9 +1,11 @@
 <html>
   <head>
-    <meta id="viewport" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <meta name="mobile-web-app-capable" content="yes">  
-    <link rel="manifest" href="manifest.json" />
     <title>Test</title>
+    <meta id="viewport" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="google-play-app" content="app-id=com.test">
+    <link rel="stylesheet" href="jquery.smartbanner.css" type="text/css" media="screen">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script src="jquery.smartbanner.js"></script>
   </head>
   <body>
     <a id="open-app-link" onclick="openApp()">Открыть приложение</a>
@@ -13,6 +15,11 @@
         const openApp = () => {
             window.location.href = 'gilmon://'
         }
+
+        $.smartbanner({
+          title: 'My good title',
+          author: 'My smart author'
+        });
     </script>
   </body>
 </html>
