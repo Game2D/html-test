@@ -1,0 +1,11 @@
+{
+    "short_name": "Gilmon",
+    "name": "Gilmon",
+    "prefer_related_applications": true,
+    "related_applications": [
+        {
+            "platform": "play",
+            "id": "com.test"
+        }
+    ]
+}
