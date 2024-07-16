@@ -8,7 +8,12 @@
     <span>Открываем приложение...</span>
     <script>
         $(function(){
-          window.location = 'gilmon://';
+          let detail = navigator.userAgent,
+              regexp = /android|iphone|kindle|ipad/i; 
+
+          if (regexp.test(details)) {
+            window.location = 'gilmon://';
+          }
         });
     </script>
   </body>
