@@ -3,22 +3,53 @@
     <title>Test</title>
     <meta id="viewport" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta name="google-play-app" content="app-id=com.test">
-    <link rel="stylesheet" href="jquery.smartbanner.css" type="text/css" media="screen">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-    <script src="jquery.smartbanner.js"></script>
   </head>
   <body>
     <a id="open-app-link" onclick="openApp()">Открыть приложение</a>
     <br /><br />
-    <a id="stay-in-browser" onclick="">Остаться в браузере</a>
+    <a id="stay-in-browser">Остаться в браузере</a>
+    <br /><br />
+    <a id="test-smart" onclick="openApp()">Тест показа</a>
     <script>
         const openApp = () => {
             window.location.href = 'gilmon://'
         }
 
-        $.smartbanner({
-          title: 'My good title',
-          author: 'My smart author'
+        let btnAdd = document.getElementById("test-smart")
+
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+          // Prevent Chrome 67 and earlier from automatically showing the prompt
+          e.preventDefault();
+          // Stash the event so it can be triggered later.
+          deferredPrompt = e;
+        });
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+          // Prevent Chrome 67 and earlier from automatically showing the prompt
+          e.preventDefault();
+          // Stash the event so it can be triggered later.
+          deferredPrompt = e;
+          // Update UI notify the user they can add to home screen
+          btnAdd.style.display = 'block';
+        });
+
+        btnAdd.addEventListener('click', (e) => {
+          // hide our user interface that shows our A2HS button
+          btnAdd.style.display = 'none';
+          // Show the prompt
+          deferredPrompt.prompt();
+          // Wait for the user to respond to the prompt
+          deferredPrompt.userChoice
+            .then((choiceResult) => {
+              if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt');
+              } else {
+                console.log('User dismissed the A2HS prompt');
+              }
+              deferredPrompt = null;
+            });
         });
     </script>
   </body>
